@@ -5,8 +5,7 @@ while setter < len(my_list):
         print(my_list[setter])
         setter += 1
         if my_list[setter] == 0:
-            print(my_list[setter + 1])
-        continue
+            setter += 1
     else:
         break
 
