@@ -4,8 +4,8 @@ while setter < len(my_list):
     if my_list[setter] > 0:
         print(my_list[setter])
         setter += 1
-        if my_list[setter] == 0:
-            setter += 1
+    elif my_list[setter] == 0:
+        setter += 1
     else:
         break
 
