@@ -65,7 +65,6 @@ class UrTube:
         return [video.title for video in self.videos if search_word_lower in video.title.lower()]
 
     def watch_video(self, title):
-        """Воспроизводит видео, если пользователь вошёл в систему и имеет право на просмотр."""
         if not self.current_user:
             print('Войдите в аккаунт, чтобы смотреть видео')
             return
@@ -76,7 +75,6 @@ class UrTube:
                     print('Вам нет 18 лет, пожалуйста покиньте страницу')
                     return
 
-                # print(f"Начинается воспроизведение видео: {video.title}")
                 for second in range(video.time_now, video.duration):
                     print(second + 1, end=' ')
                     time.sleep(1)
