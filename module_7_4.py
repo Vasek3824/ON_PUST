@@ -1,6 +1,3 @@
-from pythonProject.module_3_5 import result
-
-
 class Masters:
     def __init__(self, team1_num, score_1, team1_time):
         self.team1_num = team1_num
