@@ -1,11 +1,23 @@
+from idlelib.debugobj_r import remote_object_tree_item
+
 import module_12_2
 import source
 import unittest
 
+def skip_is_frozen(is_frozen):
+    def decor(test_func):
+        def wrapper(self):
+            if is_frozen:
+                self.skipTest('Тесты в этом кейсе заморожены')
+            else:
+                test_func(self)
+        return wrapper
+    return decor
+
 class RunnerTest(unittest.TestCase):
     is_frozen = False
 
-    @unittest.skipUnless(False, 'Тесты в этом кейсе заморожены')
+    @skip_is_frozen(is_frozen)
     def test_walk(self):
         t_w = source.Runner('TestRunner')
 
@@ -14,7 +26,7 @@ class RunnerTest(unittest.TestCase):
 
         self.assertEqual(t_w.distance, 50)
 
-    @unittest.skipUnless(False, 'Тесты в этом кейсе заморожены')
+    @skip_is_frozen(is_frozen)
     def test_run(self):
         t_r = source.Runner('TestRunner')
 
@@ -23,7 +35,7 @@ class RunnerTest(unittest.TestCase):
 
         self.assertEqual(t_r.distance, 100)
 
-    @unittest.skipUnless(False, 'Тесты в этом кейсе заморожены')
+    @skip_is_frozen(is_frozen)
     def test_challenge(self):
         t_w = source.Runner('TestRunner')
         t_r = source.Runner('TestRunner')
@@ -56,21 +68,21 @@ class TournamentTes(unittest.TestCase):
         for test in cls.all_results:
             print({key: str(value) for key, value in cls.all_results[test].items()})
 
-    @unittest.skipUnless(False, 'Тесты в этом кейсе заморожены')
+    @skip_is_frozen(is_frozen)
     def test_usain_nik(self):
         tournament = module_12_2.Tournament(90, self.usen, self.nik)
         result = tournament.start()
         TournamentTes.all_results[self._testMethodName] = result
         self.assertTrue(list(result.values())[-1], self.nik.name)
 
-    @unittest.skipUnless(False, 'Тесты в этом кейсе заморожены')
+    @skip_is_frozen(is_frozen)
     def test_andres_nik(self):
         tournament = module_12_2.Tournament(90, self.andres, self.nik)
         result = tournament.start()
         TournamentTes.all_results[self._testMethodName] = result
         self.assertTrue(list(result.values())[-1], self.nik.name)
 
-    @unittest.skipUnless(False, 'Тесты в этом кейсе заморожены')
+    @skip_is_frozen(is_frozen)
     def test_usain_andres_nik(self):
         tournament = module_12_2.Tournament(90, self.usen, self.andres, self.nik)
         result = tournament.start()
